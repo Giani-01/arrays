@@ -1,0 +1,78 @@
+using System;
+
+namespace fibanocicsharp
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter how many Fibonacci numbers you want:");
+
+            int number = Convert.ToInt32(Console.ReadLine());
+
+            if (number <= 0)
+            {
+                Console.WriteLine("Enter a number greater than 0, bru.");
+                return;
+            }
+
+            
+            int[] numbers = new int[number];
+
+            int a = 0;
+            int b = 1;
+
+            for (int i = 0; i < number; i++)
+            {
+                numbers[i] = a;
+
+                int c = a + b;
+                a = b;
+                b = c;
+            }
+
+            //low to high
+            Array.Sort(numbers);
+
+            Console.WriteLine("\nSorted Fibonacci numbers:");
+
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                Console.WriteLine(numbers[i]);
+            }
+
+           
+            Console.WriteLine("\nEnter a number to search for:");
+            int target = Convert.ToInt32(Console.ReadLine());
+
+           
+            int index = Array.BinarySearch(numbers, target);
+
+            if (index >= 0)
+            {
+                Console.WriteLine($"Number {target} found at index {index}!");
+            }
+            else
+            {
+                Console.WriteLine($"Number {target} was not found.");
+            }
+
+            Console.WriteLine("\nPress 1 to exit or 2 to restart:");
+
+            int input = Convert.ToInt32(Console.ReadLine());
+
+            if (input == 1)
+            {
+                Environment.Exit(0);
+            }
+            else if (input == 2)
+            {
+                Main(null);
+            }
+            else
+            {
+                Console.WriteLine("Invalid input.");
+            }
+        }
+    }
+}
